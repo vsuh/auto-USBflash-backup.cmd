@@ -1,13 +1,15 @@
 :: Скрипт повышает своиполномочия до админских
 @echo off
+if %1==admin goto iamadmin
 reg.exe query "HKU\S-1-5-19">nul 2>&1
 if %errorlevel% equ 1 goto UACPrompt
 
+:iamadmin
 cd /d %~dp0
 
-2>nul curl https://github.com/initmaster/USBPlugEvent/releases/download/1.0.0/USBPlugEvent.exe -o USBPlugEvent.exe
+:: 2>nul curl https://github.com/initmaster/USBPlugEvent/releases/download/1.0.0/USBPlugEvent.exe -o USBPlugEvent.exe
 USBPlugEvent.exe -i "USB\VID_346D&PID_5678\4390441110687449097" "D:\IRIS\bin\backup_flash.cmd"
-
+exit
 
 
 :UACPrompt
