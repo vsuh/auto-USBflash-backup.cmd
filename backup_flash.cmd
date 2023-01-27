@@ -6,7 +6,6 @@ call :do_backup
 call :delete_old_arcs
 
 exit
-
 :: VSCraft(c)2023 
 :: Резервное копирование содержимого USB flash drive
 :: Скрипт должен выполняться, когда флешка с файлом seal.seal устанавливается в порт
