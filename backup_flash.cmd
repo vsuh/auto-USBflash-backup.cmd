@@ -7,8 +7,8 @@ call :delete_old_arcs
 
 exit
 :: VSCraft(c)2023 
-:: ╨а╨╡╨╖╨╡╤А╨▓╨╜╨╛╨╡ ╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤Б╨╛╨┤╨╡╤А╨╢╨╕╨╝╨╛╨│╨╛ USB flash drive
-:: ╨б╨║╤А╨╕╨┐╤В ╨┤╨╛╨╗╨╢╨╡╨╜ ╨▓╤Л╨┐╨╛╨╗╨╜╤П╤В╤М╤Б╤П, ╨║╨╛╨│╨┤╨░ ╤Д╨╗╨╡╤И╨║╨░ ╤Б ╤Д╨░╨╣╨╗╨╛╨╝ seal.seal ╤Г╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╤В╤Б╤П ╨▓ ╨┐╨╛╤А╤В
+:: Резервное копирование содержимого USB flash drive
+:: Скрипт должен выполняться, когда флешка с файлом seal.seal устанавливается в порт
 ::###############################[ SUBROUTINES ]##################################::
 :check_usb_flash
 if NOT exist %SEAL% (@echo SEAL file %SEAL% not found
@@ -26,16 +26,16 @@ exit /b
 :read_settings
 set BACKUP_PATH=d:\backups\USBFLASH
 set error_log=d:\backups\log\%yy%-%mm%-%dd%_error.log
-set ╨д╨Ы╨Х╨и=d:\IRIS
+set ФЛЕШ=d:\IRIS
 set SEAL=d:\IRIS\seal.seal
 set RAR=d:\iris\bin\rar.exe
 set curr_path=%CD%
-set ╨б╨╛╤Е╤А╨░╨╜╨╕╤В╤М╨д╨░╨╣╨╗╨╛╨▓=5
+set СохранитьФайлов=5
 set pw=qwerf
 exit /b
 
 :do_backup
-cd /d %╨д╨Ы╨Х╨и%
+cd /d %ФЛЕШ%
 %RAR% a -r -u -p%pw% -agYYYY-MM-DD ^
 		-es ^
 		-y -ilog%error_log% ^
@@ -48,10 +48,10 @@ exit /b
 :delete_old_arcs
 SETLOCAL ENABLEDELAYEDEXPANSION
 Set ii=0
-echo DELETE all except %╨б╨╛╤Е╤А╨░╨╜╨╕╤В╤М╨д╨░╨╣╨╗╨╛╨▓% files from "%BACKUP_PATH%" directory
+echo DELETE all except %СохранитьФайлов% files from "%BACKUP_PATH%" directory
 for /f  %%I in ('dir /o:-d /a:-d /b %BACKUP_PATH%') DO (
 	Set /a ii=ii+1
-	if !ii! GTR %╨б╨╛╤Е╤А╨░╨╜╨╕╤В╤М╨д╨░╨╣╨╗╨╛╨▓% echo !ii!: DELETE %%I && del %BACKUP_PATH%\%%I
+	if !ii! GTR %СохранитьФайлов% echo !ii!: DELETE %%I && del %BACKUP_PATH%\%%I
 )
 
 :set_dateParts
