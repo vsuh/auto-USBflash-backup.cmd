@@ -1,4 +1,4 @@
-:: 
+:: charset="cp866"
 :: Скрипт повышает своиполномочия до админских
 @echo off
 if %1==admin goto iamadmin
@@ -7,9 +7,10 @@ if %errorlevel% equ 1 goto UACPrompt
 
 :iamadmin
 cd /d %~dp0
-
+:: ID устройства можно получить USBPlugEvent.exe -l
+Set id=USB\VID_346D&PID_5678\4390441110687449097
 :: 2>nul curl https://github.com/initmaster/USBPlugEvent/releases/download/1.0.0/USBPlugEvent.exe -o USBPlugEvent.exe
-USBPlugEvent.exe -i "USB\VID_346D&PID_5678\4390441110687449097" "D:\IRIS\bin\backup_flash.cmd"
+USBPlugEvent.exe -i "%id%" "D:\IRIS\bin\backup_flash.cmd"
 exit
 
 

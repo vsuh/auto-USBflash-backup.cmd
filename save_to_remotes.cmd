@@ -1,7 +1,8 @@
+:: charset="cp866"
 ::# backup.dest.ssh.1 = cyxasus:G:/IRIS_BACKUPS
 ::# backup.dest.ssh.2 = helor:BACKUPS/IRIS
-::# backup.files.path=d:\backups\USBFLASH
-::# backup.keypath=C:\Users\vsuh\.ssh\id_rsa
+::# backup.files.path = d:\backups\USBFLASH
+::# backup.keypath = C:\Users\vsuh\.ssh\id_rsa
 SETLOCAL ENABLEDELAYEDEXPANSION
 @echo on
 Set me=%0

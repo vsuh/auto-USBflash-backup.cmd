@@ -1,3 +1,4 @@
+:: charset="cp866"
 @echo off
 call :set_dateParts
 call :read_settings
