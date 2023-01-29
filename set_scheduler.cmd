@@ -8,7 +8,7 @@ reg.exe query "HKU\S-1-5-19">nul 2>&1
 if %errorlevel% equ 1 goto UACPrompt
 
 :iamadmin
-Set task.name=\deleMe\USB_EVENT_REGISTER
+Set task.name=\cyx\USB_EVENT_REGISTER
 Set task.exe=USBPlugEvent
 Set task.cmd="%~dp0register_USB_insert.cmd admin"
 >>%cmd.log% echo %date% %time% ==============================================
