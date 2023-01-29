@@ -14,4 +14,4 @@ Options:
   -i  Launch the command on insert only.  
   -r  Launch the command on remove only.
 
-https://github.com/initmaster/USBPlugEvent
+[github](https://github.com/initmaster/USBPlugEvent)

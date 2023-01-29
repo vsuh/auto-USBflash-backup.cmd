@@ -1,0 +1,17 @@
+;- все пробелы при чтении файла вырезаются, если в значении требуется пробел, 
+;  его нужно экранировать символом '\'
+;- пустые значения переменных не допускаются
+;- выравнивание табуляцией не предусмотрено
+;- подстановка переменных не выполняется
+
+vsuh.register.id       = USB\VID_346D&PID_5678\43904411106874
+
+vsuh.backup.dest.ssh.1 = username@ssh-winhost:X:/IRIS_BACKUPS
+vsuh.backup.dest.ssh.2 = ssh-server:BACKUPS/IRIS
+vsuh.backup.files.path = d:\backups\USBFLASH
+vsuh.backup.keypath    = C:\Users\User\.ssh\id_rsa
+
+vsuh.task.name         = \cyx\USB_EVENT_REGISTER
+vsuh.task.exe          = USBPlugEvent
+vsuh.task.cmd          = "register_USB_insert.cmd\ admin"
+

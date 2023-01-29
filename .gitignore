@@ -1,3 +1,5 @@
 rar.exe 
 USBPlugEvent.exe
 *.log
+log/
+settings.ini
