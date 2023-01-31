@@ -30,7 +30,7 @@ FOR /F "eol=; usebackq delims== tokens=1,2*" %%A in (`set %PRF%`) DO @(
         if /I !var!==!CheckVar:%PRF%.=! @Set !CheckVar!=
     )
  )
- echo on
+ 
 Set %PRF% 2>nul >nul
 
 if %ERRORLEVEL% EQU 0 ( echo В файле `settings.ini` не найдены переменные:
