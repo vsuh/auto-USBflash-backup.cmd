@@ -1,8 +1,9 @@
-:: charset="cp866"
+:: charset="cp866"                                                         VSCraft(c)2023 
+:: Резервное копирование содержимого USB flash drive
+:: Скрипт должен выполняться только когда флешка с файлом seal.seal устанавливается в порт
+
 @echo off
-SETLOCAL ENABLEDELAYEDEXPANSION 
-cd /d %~dp0 
-call configure
+SETLOCAL ENABLEDELAYEDEXPANSION && cd /d %~dp0 && call configure
 
 call :set_dateParts
 call :read_settings
@@ -11,12 +12,8 @@ call :do_backup
 call :delete_old_arcs
 
 exit
-:: VSCraft(c)2023 
-:: Резервное копирование содержимого USB flash drive
-:: Скрипт должен выполняться, когда флешка с файлом seal.seal устанавливается в порт
-::###############################[ SUBROUTINES ]##################################::
-:check_usb_flash
 
+:check_usb_flash
 if NOT exist %SEAL% (@echo SEAL file %SEAL% not found
 	exit
 )
@@ -24,20 +21,15 @@ set /p _seal=<%SEAL%
 if NOT `%_seal%`==`%vsuh.flash.pin%` (@echo SEAL "%_seal%" not correct
 	exit 
 )
-if NOT exist %RAR% (@echo RAR executable not found
-	exit
-)
 exit /b
 
 :read_settings
-::	set BACKUP_PATH=d:\backups\USBFLASH
 set error_log=%~dp0log\%yy%-%mm%-%dd%_error.log
-::	set ФЛЕШ=d:\IRIS
 set SEAL=%vsuh.flash.mountpoint%\seal.seal
 set RAR=%vsuh.flash.mountpoint%\bin\rar.exe
-::set curr_path=%CD%
-::set СохранитьФайлов=5
-::set pw=qwerf
+if NOT exist %RAR% (@echo RAR executable not found in %vsuh.flash.mountpoint%\bin
+	exit
+)
 exit /b
 
 :do_backup
@@ -57,7 +49,7 @@ cd /d %~dp0
 exit /b
 
 :delete_old_arcs
-SETLOCAL ENABLEDELAYEDEXPANSION
+
 Set ii=0
 echo DELETE all except %vsuh.backup.keepfiles% files from "%vsuh.backup.files.path%" directory
 for /f  %%I in ('dir /o:-d /a:-d /b %vsuh.backup.files.path%') DO (
