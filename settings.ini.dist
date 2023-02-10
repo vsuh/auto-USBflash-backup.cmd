@@ -20,3 +20,10 @@ vsuh.task.cmd          = "register_USB_insert.cmd\ admin"
 
 vsuh.flash.pin         = 32457245
 vsuh.flash.mountpoint  = J:\
+vsuh.rar_ext_exept.file= J:\ex.bak
+; возможно указать до 99 масок для исключения из резервного копирования
+;vsuh.ext.1=*.bak
+;vsuh.ext.11=*.dt
+;vsuh.ext.12=*.log
+;vsuh.ext.21=tmp\*
+;vsuh.ext.21=tmp

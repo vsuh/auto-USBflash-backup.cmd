@@ -3,7 +3,7 @@
 :: Скрипт должен выполняться только когда флешка с файлом seal.seal устанавливается в порт
 
 @echo off
-SETLOCAL ENABLEDELAYEDEXPANSION && cd /d %~dp0 && call configure
+SETLOCAL ENABLEDELAYEDEXPANSION && cd /d %~dp0 && call configure no
 
 call :set_dateParts
 call :read_settings
@@ -33,23 +33,26 @@ if NOT exist %RAR% (@echo RAR executable not found in %vsuh.flash.mountpoint%\bi
 exit /b
 
 :do_backup
+call :create_exceptions
 cd /d %vsuh.flash.mountpoint%
-echo CD=%CD% %RAR% a -r -u -p%vsuh.backup.rarpw% -agYYYY-MM-DD ^
-		-es ^
-		-y -ilog%error_log% ^
-		%vsuh.backup.files.path%\IRIS_ *.*
+echo CD=%CD% %RAR% a -r -u -p%vsuh.backup.rarpw% -agYYYY-MM-DD -idq -es -x@%vsuh.rar_ext_exept.file% -y -ilog%error_log% %vsuh.backup.files.path%\IRIS_ *.*
 
-%RAR% a -r -u -p%vsuh.backup.rarpw% -agYYYY-MM-DD ^
-		-es ^
-		-y -ilog%error_log% ^
-		%vsuh.backup.files.path%\IRIS_ *.*
-
+%RAR% a -r -u -p%vsuh.backup.rarpw% -agYYYY-MM-DD^
+              -idq -es ^
+              -x@%vsuh.rar_ext_exept.file%^
+              -y -ilog%error_log% ^
+              %vsuh.backup.files.path%\IRIS_ *.*
+Set vsuh.rar.err=%ERRORLEVEL%
+Set vsuh.result=%vsuh.flash.mountpoint%\BACKED.UP!
+attrib -r -s -h %vsuh.result% 
+echo %date% %time% Backup done RC:%vsuh.rar.err%>%vsuh.result%
+attrib +r +s +h %vsuh.result%
 cd /d %~dp0
 
 exit /b
 
 :delete_old_arcs
-
+del %vsuh.rar_ext_exept.file%
 Set ii=0
 echo DELETE all except %vsuh.backup.keepfiles% files from "%vsuh.backup.files.path%" directory
 for /f  %%I in ('dir /o:-d /a:-d /b %vsuh.backup.files.path%') DO (
@@ -62,4 +65,13 @@ exit /b
 Set yy=%date:~6,4%
 Set mm=%date:~3,2%
 Set dd=%date:~0,2%
+exit /b
+
+:create_exceptions
+
+FOR /L %%I in (1,1,100) DO (
+	Set nn=%%I
+	IF NOT `!vsuh.ext.%%I!`==`` >>%vsuh.rar_ext_exept.file% echo !vsuh.ext.%%I!
+)
+ 
 exit /b

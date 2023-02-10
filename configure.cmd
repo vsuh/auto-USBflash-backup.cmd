@@ -2,7 +2,8 @@
 
 cd %~dp0
 
-call :check_cfg
+if `%1`==`` call :check_cfg
+
 FOR /F "eol=; usebackq delims== tokens=1,2*" %%I in ("settings.ini") DO @(
     @Set var=%%I
     @Set value=%%J
