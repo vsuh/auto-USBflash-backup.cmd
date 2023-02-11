@@ -20,6 +20,7 @@ call :create_xml
 >>%cmd.log% echo %time% ^> SCHTASKS /Create /RU SYSTEM /xml "%vsuh.task.xml%" /TN "%vsuh.task1.name%" /F
 >>%cmd.log% 2>&1           SCHTASKS /Delete /TN "%vsuh.task1.name%" /F
 >>%cmd.log% 2>&1           SCHTASKS /Create /RU SYSTEM /xml %vsuh.task.xml% /TN "%vsuh.task1.name%" /F 
+del %vsuh.task.xml%
 
 echo err=%ERRORLEVEL%
 tasklist /FI "IMAGENAME eq %vsuh.task.exe%*"|find /I "%vsuh.task.exe%" && ( 
