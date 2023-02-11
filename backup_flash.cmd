@@ -3,7 +3,7 @@
 :: Скрипт должен выполняться только когда флешка с файлом seal.seal устанавливается в порт
 
 @echo off
-SETLOCAL ENABLEDELAYEDEXPANSION && cd /d %~dp0 && call configure no
+SETLOCAL ENABLEDELAYEDEXPANSION && cd /d %~dp0 && call cmd\configure no
 
 call :set_dateParts
 call :read_settings

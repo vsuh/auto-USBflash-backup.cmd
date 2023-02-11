@@ -7,7 +7,7 @@ reg.exe query "HKU\S-1-5-19">nul 2>&1
 if %errorlevel% equ 1 goto UACPrompt
 
 :iamadmin
-SETLOCAL ENABLEDELAYEDEXPANSION && cd /d %~dp0 && call configure
+SETLOCAL ENABLEDELAYEDEXPANSION && cd /d %~dp0 && call cmd\configure
 
 :: # curl https://github.com/initmaster/USBPlugEvent/releases/download/1.0.0/USBPlugEvent.exe -o USBPlugEvent.exe (as admin)
 USBPlugEvent.exe -i "%vsuh.register.id%" "%vsuh.register.cmd%"

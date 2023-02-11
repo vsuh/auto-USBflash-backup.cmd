@@ -21,6 +21,18 @@ vsuh.task.cmd          = "register_USB_insert.cmd\ admin"
 vsuh.flash.pin         = 32457245
 vsuh.flash.mountpoint  = J:\
 vsuh.rar_ext_exept.file= J:\ex.bak
+
+vsuh.tmpl=tmpl\Backup_Task.xmlTmpl
+vsuh.task.xml=Task.xml
+; список шаблонных переменных и их значений для замены в шаблоне задачи
+vsuh.var.1=USERNAME
+vsuh.var.2=LOGONUSER
+vsuh.var.3=CMDPATH
+vsuh.val.1=%USERNAME%
+vsuh.val.2=%USERDOMAIN%\%USERNAME%
+vsuh.val.3=J:\bin\backup_flash.cmd
+
+
 ; возможно указать до 99 масок для исключения из резервного копирования
 ;vsuh.ext.1=*.bak
 ;vsuh.ext.11=*.dt

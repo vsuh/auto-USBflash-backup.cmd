@@ -1,6 +1,6 @@
 @echo off
 
-cd %~dp0
+cd %~dp0\..
 
 if `%1`==`` call :check_cfg
 
