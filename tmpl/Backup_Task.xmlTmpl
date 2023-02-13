@@ -4,13 +4,12 @@
         <Date>2023-02-10T13:21:17-08:00</Date>
         <Author>|USERNAME|</Author>
         <Version>1.0.0</Version>
-        <Description>USB flash backup on Idle</Description>
+        <Description>Ёто задание запускаетс€ дл€ выполнени€ командного файла резервного копировани€ USB флешки. ќно срабатывает при простое, при разблокировании рабочей станции владельцем задани€ и каждые 2:30 часа.</Description>
     </RegistrationInfo>
     <Principals>
         <Principal>
-            <UserId>|USERNAME|</UserId>
-            <LogonType>InteractiveToken</LogonType>
-	    <RunLevel>LeastPrivilege</RunLevel>
+            <UserId>SYSTEM</UserId>
+	    <RunLevel>HighestAvailable</RunLevel>
         </Principal>
     </Principals>
  <Triggers>
@@ -20,7 +19,7 @@
         <Duration>P1D</Duration>
         <StopAtDurationEnd>false</StopAtDurationEnd>
       </Repetition>
-      <StartBoundary>2011-11-11T11:11:11</StartBoundary>
+      <StartBoundary>2001-01-01T01:01:01</StartBoundary>
       <Enabled>true</Enabled>
        <ScheduleByWeek>
         <DaysOfWeek>
@@ -39,6 +38,7 @@
     <SessionStateChangeTrigger>
       <Enabled>true</Enabled>
       <StateChange>SessionUnlock</StateChange>
+      <Delay>PT30S</Delay>
       <UserId>|LOGONUSER|</UserId>
     </SessionStateChangeTrigger>
   </Triggers>

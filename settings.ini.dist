@@ -1,7 +1,7 @@
 ;- все пробелы при чтении файла вырезаются, если в значении требуется пробел, 
 ;  его нужно экранировать символом '\'
 ;- пустые значения переменных не допускаются
-;- выравнивание табуляцией не предусмотрено
+;- выравнивание табуляцией не предусмотрено (только пробелами)
 ;- подстановка переменных не выполняется
 
 vsuh.register.id       = USB\VID_346D&PID_5678\43904411106874
@@ -9,28 +9,34 @@ vsuh.register.id       = USB\VID_346D&PID_5678\43904411106874
 vsuh.backup.dest.ssh.1 = username@ssh-winhost:X:/IRIS_BACKUPS
 vsuh.backup.dest.ssh.2 = ssh-server:BACKUPS/IRIS
 
-vsuh.backup.files.path = d:\backups\USBFLASH
+vsuh.backup.files.path = d:\backups\USBFLASH_001
 vsuh.backup.keypath    = C:\Users\User\.ssh\id_rsa
 vsuh.backup.keepfiles  = 5
-vsuh.backup.rarpw      = qwerf
+vsuh.backup.rarpw      = strong%#$p@SSWORD
 
 vsuh.task.name         = "\Local\ Tasks\USB_EVENT_REGISTER"
 vsuh.task.exe          = USBPlugEvent
 vsuh.task.cmd          = "register_USB_insert.cmd\ admin"
 
+; на флешке доолжен лежать файл seal.seal с этой строкой внутри:
 vsuh.flash.pin         = 32457245
 vsuh.flash.mountpoint  = J:\
 vsuh.rar_ext_exept.file= J:\ex.bak
 
-vsuh.tmpl=tmpl\Backup_Task.xmlTmpl
-vsuh.task.xml=Task.xml
+vsuh.tmpl              = tmpl\Backup_Task.xmlTmpl
+vsuh.task.xml          = Task.xml
+vsuh.tmpreg            = tmpl\EVENT_REGISTER.xmlTmpl
+
 ; список шаблонных переменных и их значений для замены в шаблоне задачи
-vsuh.var.1=USERNAME
-vsuh.var.2=LOGONUSER
-vsuh.var.3=CMDPATH
-vsuh.val.1=%USERNAME%
-vsuh.val.2=%USERDOMAIN%\%USERNAME%
-vsuh.val.3=J:\bin\backup_flash.cmd
+vsuh.var.1             = USERNAME
+vsuh.var.2             = LOGONUSER
+vsuh.var.3             = CMDPATH
+vsuh.var.4             = CMDREG
+
+vsuh.val.1             = %USERNAME%
+vsuh.val.2             = %USERDOMAIN%\%USERNAME%
+vsuh.val.3             = J:\bin\backup_flash.cmd
+vsuh.val.4             = J:\bin\register_USB_insert.cmd
 
 
 ; возможно указать до 99 масок для исключения из резервного копирования
