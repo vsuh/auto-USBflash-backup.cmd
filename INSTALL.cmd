@@ -1,5 +1,5 @@
 :: charset="cp866"
-:: ¥£¨áâà¨àã¥â § ¤ çã ¢ ¯« ­¨à®¢é¨ª¥ § ¤ ­¨© ¯® § ¯ãáªã áªà¨¯â  register_USB_insert.cmd ¯à¨ áâ àâ¥ ª®¬¯ìîâ¥à 
+:: Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€ÑƒÐµÑ‚ Ð·Ð°Ð´Ð°Ñ‡Ñƒ Ð² Ð¿Ð»Ð°Ð½Ð¸Ñ€Ð¾Ð²Ñ‰Ð¸ÐºÐµ Ð·Ð°Ð´Ð°Ð½Ð¸Ð¹ Ð¿Ð¾ Ð·Ð°Ð¿ÑƒÑÐºÑƒ ÑÐºÑ€Ð¸Ð¿Ñ‚Ð° register_USB_insert.cmd Ð¿Ñ€Ð¸ ÑÑ‚Ð°Ñ€Ñ‚Ðµ ÐºÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€Ð°
 cd /d %~dp0
 Set cmd.log=log\%~n0.log
 
@@ -11,20 +11,21 @@ if %errorlevel% equ 1 goto UACPrompt
 @SETLOCAL ENABLEDELAYEDEXPANSION && cd /d %~dp0 && call cmd\configure
 >>%cmd.log% echo %date% %time% ==============================================
 
+call :create_xml %vsuh.task.tmpl% 1
+>>%cmd.log% echo %time% ^> SCHTASKS /Create /RU SYSTEM /xml %vsuh.task.xml% /TN "%vsuh.task.name%" /F 
 >>%cmd.log% 2>&1           SCHTASKS /Delete /TN "%vsuh.task.name%" /F 
->>%cmd.log% echo %time% ^> SCHTASKS /Create /RU SYSTEM /SC ONSTART /TN "%vsuh.task.name%" /TR "%~dp0!vsuh.task.cmd!" /F
->>%cmd.log% 2>&1           SCHTASKS /Create /RU SYSTEM /SC ONSTART /TN "%vsuh.task.name%" /TR "%~dp0!vsuh.task.cmd!" /F
->>%cmd.log% 2>&1           SCHTASKS /Change /RI 151 /TN "%vsuh.task.name%" 
-
-call :create_xml
->>%cmd.log% echo %time% ^> SCHTASKS /Create /RU SYSTEM /xml "%vsuh.task.xml%" /TN "%vsuh.task1.name%" /F
+>>%cmd.log% 2>&1           SCHTASKS /Create /TN "%vsuh.task.name%"  /RU SYSTEM /xml 1_%vsuh.task.xml% /F
+if NOT defined vsuh.dev del 1_%vsuh.task.xml%
+         
+call :create_xml %vsuh.task.tmpl% 2
+>>%cmd.log% echo %time% ^> SCHTASKS /Create /RU SYSTEM /xml "%vsuh.task.xml%" /TN "%vsuh.task1.name%" /F (%CD%) xml %vsuh.task.xml%
 >>%cmd.log% 2>&1           SCHTASKS /Delete /TN "%vsuh.task1.name%" /F
->>%cmd.log% 2>&1           SCHTASKS /Create /RU SYSTEM /xml %vsuh.task.xml% /TN "%vsuh.task1.name%" /F 
-del %vsuh.task.xml%
+>>%cmd.log% 2>&1           SCHTASKS /Create /TN "%vsuh.task1.name%" /RU SYSTEM /xml 2_%vsuh.task.xml% /F 
+if NOT defined vsuh.dev del 2_%vsuh.task.xml%
 
 echo err=%ERRORLEVEL%
 tasklist /FI "IMAGENAME eq %vsuh.task.exe%*"|find /I "%vsuh.task.exe%" && ( 
-	>>%cmd.log% echo %time% à®£à ¬¬  %vsuh.task.exe% ã¦¥ ¢ë¯®«­ï¥âáï. ‡ ¢¥àè î ¯à®æ¥áá.
+	>>%cmd.log% echo %time% ÐŸÑ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð° %vsuh.task.exe% ÑƒÐ¶Ðµ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÑ‚ÑÑ. Ð—Ð°Ð²ÐµÑ€ÑˆÐ°ÑŽ Ð¿Ñ€Ð¾Ñ†ÐµÑÑ.
 	>>%cmd.log% taskkill /F /FI "IMAGENAME eq %vsuh.task.exe%*"
 	) 
 >>%cmd.log%  echo %time% ^> SCHTASKS /Run /I /TN "%vsuh.task.name%"
@@ -32,28 +33,31 @@ tasklist /FI "IMAGENAME eq %vsuh.task.exe%*"|find /I "%vsuh.task.exe%" && (
 exit
 
 :UACPrompt
-mshta "vbscript:CreateObject("Shell.Application").ShellExecute("%~fs0", "", "", "runas", 1) & Close()"
+@mshta "vbscript:CreateObject("Shell.Application").ShellExecute("%~fs0", "", "", "runas", 1) & Close()"
 
 exit /b
 
 
 :create_xml
 SETLOCAL ENABLEDELAYEDEXPANSION
->nul chcp 65001
+chcp 65001
+>%2_%vsuh.task.xml% type nul
 
->%vsuh.task.xml% type nul
+::Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ð¹ ÐºÐ¾ÑÑ‚Ñ‹Ð»ÑŒ
+if %2 equ 1 Set vsuh.val.3=!vsuh.cmdpath.register!
+if %2 equ 2 Set vsuh.val.3=!vsuh.cmdpath.backup!
 
-for /F "tokens=1,2,3* delims=|" %%A in (%vsuh.tmpl%) do (
+for /F "tokens=1,2,3* delims=â€¢" %%A in ('type %1') do (
     Set _str=%%A%%B%%C
     for /L %%T in (1,1,5) do (
         Set _var=!vsuh.var.%%T!
         Set _val=!vsuh.val.%%T!
         if `%%B`==`!_var!` (
-		Set _str=%%A!_val!%%C 
-		)
+	    Set _str=%%A!_val!%%C 
+	)
     )
   echo !_str!
-)>>%vsuh.task.xml% 
->nul chcp 866
+)>>%2_%vsuh.task.xml% 
+chcp 866
 exit /b
 
