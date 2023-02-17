@@ -3,3 +3,4 @@ USBPlugEvent.exe
 *.log
 log/
 settings.ini
+Task.xml

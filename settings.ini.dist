@@ -16,7 +16,7 @@ vsuh.backup.rarpw      = strong%#$p@SSWORD
 
 vsuh.task.name         = "\Local\ Tasks\USB_EVENT_REGISTER"
 vsuh.task.exe          = USBPlugEvent
-vsuh.cmdpath.register          = "register_USB_insert.cmd\ admin"
+;vsuh.cmdpath.register  = "register_USB_insert.cmd\ admin"
 
 ; на флешке доолжен лежать файл seal.seal с этой строкой внутри:
 vsuh.flash.pin         = 32457245
@@ -31,14 +31,14 @@ vsuh.tmplreg           = tmpl\EVENT_REGISTER.xmlTmpl
 vsuh.var.1             = USERNAME
 vsuh.var.2             = LOGONUSER
 vsuh.var.3             = CMDPATH
-vsuh.var.4             = CMDREG
-vsuh.var.5             = WORKDIR
+
+vsuh.var.4             = WORKDIR
 
 vsuh.val.1             = %USERNAME%
 vsuh.val.2             = %USERDOMAIN%\%USERNAME%
-vsuh.val.3             = J:\bin\backup_flash.cmd
-vsuh.val.4             = J:\bin\register_USB_insert.cmd
-vsuh.val.5             = J:\bin
+vsuh.val.3.backup      = J:\bin\backup_flash.cmd
+vsuh.val.3.register    = J:\bin\register_USB_insert.cmd
+vsuh.val.4             = J:\bin
 
 
 ; возможно указать до 99 масок для исключения из резервного копирования

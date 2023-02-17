@@ -35,8 +35,12 @@ vsuh.task.name         = \cyx\USB_EVENT_REGISTER
 ...
 vsuh.backup.files.path = S:\backups\USB
 ...
-vsuh.cmdpath.register  = cmd\register_USB_insert.cmd\ admin
-vsuh.cmdpath.backup    = BACKUP.cmd
+vsuh.val.1              = !USERNAME!
+vsuh.val.2              = !USERDOMAIN!\!USERNAME!
+vsuh.val.3              = D:\IRIS\bin\BACKUP.cmd
+vsuh.val.4              = D:\IRIS\bin\cmd\register_USB_insert.cmd\ admin
+vsuh.val.5              = D:\IRIS\bin
+
 ```
 
 - Выполнить `INSTALL.cmd`.
