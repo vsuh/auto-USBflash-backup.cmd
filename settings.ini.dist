@@ -1,3 +1,4 @@
+;                                                                                    VSCraft@2023
 ;- все пробелы при чтении файла вырезаются, если в значении требуется пробел, 
 ;  его нужно экранировать символом '\'
 ;- пустые значения переменных не допускаются
@@ -21,7 +22,6 @@ vsuh.task.exe          = USBPlugEvent
 ; на флешке доолжен лежать файл seal.seal с этой строкой внутри:
 vsuh.flash.pin         = 32457245
 vsuh.flash.mountpoint  = J:\
-vsuh.rar_ext_exept.file= J:\ex.bak
 
 vsuh.task.tmpl         = tmpl\TaskTemplate.xml
 vsuh.task.xml          = Task.xml
@@ -31,7 +31,6 @@ vsuh.tmplreg           = tmpl\EVENT_REGISTER.xmlTmpl
 vsuh.var.1             = USERNAME
 vsuh.var.2             = LOGONUSER
 vsuh.var.3             = CMDPATH
-
 vsuh.var.4             = WORKDIR
 
 vsuh.val.1             = %USERNAME%
@@ -40,6 +39,7 @@ vsuh.val.3.backup      = J:\bin\backup_flash.cmd
 vsuh.val.3.register    = J:\bin\register_USB_insert.cmd
 vsuh.val.4             = J:\bin
 
+vsuh.rar_ext_exept.file= J:\ex.bak
 
 ; возможно указать до 99 масок для исключения из резервного копирования
 ;vsuh.ext.1=*.bak

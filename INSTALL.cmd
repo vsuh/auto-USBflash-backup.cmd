@@ -1,4 +1,4 @@
-:: charset="cp866"
+:: charset="utf-8"
 :: Регистрирует задачу в планировщике заданий по запуску скрипта register_USB_insert.cmd при старте компьютера
 cd /d %~dp0
 Set cmd.log=log\%~n0.log
