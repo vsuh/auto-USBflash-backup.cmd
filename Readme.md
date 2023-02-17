@@ -56,7 +56,6 @@ vsuh.val.5              = D:\IRIS\bin
 
 > В проекте используется программа [USBPlugEvent.exe](https://github.com/initmaster/USBPlugEvent), которая умеет регистрировать события установки и извлечения USB устройства. см. [USBPlugEvent.md](USBPlugEvent.md)
 
-актуальный список файлов на флешке в [current.filelist](current.filelist)
 
 ✓ TODO: Регистрация задачи запуска резервного копирования при установке USB накопителя  
 ✓ TODO: Запускать скрипт `backup_flash` автоматически при установке флешки в порт  
