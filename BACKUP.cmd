@@ -26,10 +26,8 @@ exit /b
 :read_settings
 set error_log=log\%yy%-%mm%-%dd%_error.log
 set SEAL=%vsuh.flash.mountpoint%\seal.seal
-set RAR=%vsuh.flash.mountpoint%\bin\rar.exe
-if NOT exist %RAR% (@echo RAR executable not found in %vsuh.flash.mountpoint%\bin
-	exit
-)
+set RAR=%~dp0cmd\rar.exe
+if NOT exist %RAR% ( echo RAR executable not found in %RAR% && exit )
 exit /b
 
 :do_backup
