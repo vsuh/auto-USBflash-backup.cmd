@@ -2,7 +2,7 @@
 :: Регистрирует задачу в планировщике заданий по запуску скрипта register_USB_insert.cmd при старте компьютера
 cd /d %~dp0
 Set cmd.log=log\%~n0.log
-
+call :check_all
 if `%1`==`admin` goto iamadmin
 reg.exe query "HKU\S-1-5-19">nul 2>&1
 if %errorlevel% equ 1 goto UACPrompt
@@ -59,3 +59,9 @@ for /F "tokens=1,2,3* delims=•" %%A in ('type %1') do (
 >nul chcp 866
 exit /b
 
+:check_all
+>nul chcp 65001
+if not exist cmd\rar.exe 		( echo Файл "%~dp0cmd\rar.exe" НЕ найден && exit )
+if not exist cmd\USBPlugEvent.exe 	( echo Файл "%~dp0cmd\USBPlugEvent.exe" НЕ найден && exit )
+if not exist settings.ini 		( echo Файл "%~dp0settings.ini" НЕ найден && exit )
+exit /b

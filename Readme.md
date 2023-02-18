@@ -8,6 +8,8 @@
 git clone https://github.com/vsuh/auto-USBflash-backup.cmd
 curl -o USBPlugEvent.exe https://github.com/initmaster/USBPlugEvent/releases/download/1.0.0/USBPlugEvent.exe
 ```
+- в каталог `cmd` добавить файлы `rar.exe` и `USBPlugEvent.exe`
+
 - Создать свой экземпляр настроек - `settings.ini`
 
 ```
