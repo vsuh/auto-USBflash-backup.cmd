@@ -13,7 +13,7 @@ tasklist /FI "IMAGENAME eq %vsuh.task.exe%*"|find /I "%vsuh.task.exe%" && (
 	>>%cmd.log% echo %time% Программа %vsuh.task.exe% уже выполняется. Завершаю процесс.
 	>>%cmd.log% taskkill /F /FI "IMAGENAME eq %vsuh.task.exe%*"
 	) 
-pause
+
 :: # curl https://github.com/initmaster/USBPlugEvent/releases/download/1.0.0/USBPlugEvent.exe -o USBPlugEvent.exe (as admin)
 echo cmd\USBPlugEvent.exe -i "%vsuh.USBflash.id%" "%~dp0..\%vsuh.cmdpath.backup%"
 start /b cmd\USBPlugEvent.exe -i "%vsuh.USBflash.id%" "%~dp0..\%vsuh.cmdpath.backup%"
