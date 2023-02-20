@@ -4,7 +4,7 @@
 
 ## Установка
 
-- Загрузить проект и [USBPlugEvent.exe](https://github.com/initmaster/USBPlugEvent/releases/download/1.0.0/USBPlugEvent.exe) (exe-файл можно загрузить только из-под администратора)
+- Загрузить проект, `rar.exe` из пакета [WinRar](https://www.win-rar.com/download.html) и [USBPlugEvent.exe](https://github.com/initmaster/USBPlugEvent/releases/download/1.0.0/USBPlugEvent.exe) (exe-файл можно загрузить только из-под администратора)
 
 ```bat
 git clone https://github.com/vsuh/auto-USBflash-backup.cmd
