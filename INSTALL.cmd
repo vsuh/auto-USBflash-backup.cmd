@@ -23,7 +23,7 @@ call :create_xml %vsuh.task.tmpl% backup
 >>%cmd.log% 2>&1           SCHTASKS /Create /TN "%vsuh.task1.name%" /RU SYSTEM /xml %vsuh.task.xml% /F 
 if NOT defined vsuh.dev del %vsuh.task.xml%
 
-echo err=%ERRORLEVEL%
+
 tasklist /FI "IMAGENAME eq %vsuh.task.exe%*"|find /I "%vsuh.task.exe%" && ( 
 	>>%cmd.log% echo %time% Программа %vsuh.task.exe% уже выполняется. Завершаю процесс.
 	>>%cmd.log% taskkill /F /FI "IMAGENAME eq %vsuh.task.exe%*"
