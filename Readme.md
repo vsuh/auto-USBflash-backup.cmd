@@ -41,14 +41,14 @@ vsuh.backup.files.path = S:\backups\USB
 ...
 vsuh.val.1              = !USERNAME!
 vsuh.val.2              = !USERDOMAIN!\!USERNAME!
-vsuh.val.3              = D:\IRIS\bin\BACKUP.cmd
-vsuh.val.4              = D:\IRIS\bin\cmd\register_USB_insert.cmd\ admin
-vsuh.val.5              = D:\IRIS\bin
+vsuh.val.3.backup       = D:\IRIS\bin\BACKUP.cmd
+vsuh.val.3.register     = D:\IRIS\bin\cmd\register_USB_insert.cmd\ admin
+vsuh.val.4              = D:\IRIS\bin
 
 ```
 
 - Выполнить `INSTALL.cmd`. (В Far-е это можно сделать через пользовательское меню - F2)
-В результате в планировщике заданий появится задача с именем __%vsuh.task.name%__, которая будет выполняться при каждом включении компьютера и регистрировать событие установки USB накопителя для запуска скрипта резервного копирования  __%vsuh.cmdpath.backup%__.
+В результате в планировщике заданий появится задача с именем __%vsuh.task.name%__, которая будет выполняться при разблокировании компьютера и регистрировать событие установки USB накопителя для запуска скрипта резервного копирования  __%vsuh.cmdpath.backup%__.
 
 ## Скрипты
 
