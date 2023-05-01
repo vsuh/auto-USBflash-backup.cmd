@@ -10,8 +10,15 @@ call :read_settings
 call :check_usb_flash
 call :do_backup
 call :delete_old_arcs
+call :sync_remote
 
 exit
+
+:sync_remote
+rclone -P --retries 10 --retries-sleep 10s ^
+  --log-file %~dp0\log\sync.log --log-level INFO ^
+  sync %vsuh.backup.files.path% uu0:iris 
+exit /b
 
 :check_usb_flash
 if NOT exist %SEAL% (@echo SEAL file %SEAL% not found
@@ -33,7 +40,7 @@ exit /b
 :do_backup
 call :create_exceptions
 cd /d %vsuh.flash.mountpoint%
-echo CD=%CD% %RAR% a -r -u -p%vsuh.backup.rarpw% -agYYYY-MM-DD -idq -es -x@%vsuh.rar_ext_exept.file% -y -ilog%error_log% %vsuh.backup.files.path%\IRIS_ *.*
+echo CD=%CD% %RAR% a -r -u -pPASSWD -agYYYY-MM-DD -idq -es -x@%vsuh.rar_ext_exept.file% -y -ilog%error_log% %vsuh.backup.files.path%\IRIS_ *.*
 
 %RAR% a -r -u -p%vsuh.backup.rarpw% -agYYYY-MM-DD^
               -idq -es ^
@@ -47,7 +54,6 @@ attrib -r -s -h %vsuh.result%
 echo %date% %time% Backup done RC:%vsuh.rar.err%>%vsuh.result%
 attrib +r +s +h %vsuh.result%
 cd /d %~dp0
-
 exit /b
 
 :delete_old_arcs
