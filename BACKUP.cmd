@@ -17,6 +17,7 @@ exit
 :sync_remote
 rclone -P --retries 10 --retries-sleep 10s ^
   --log-file %~dp0\log\sync.log --log-level INFO ^
+  --drive-use-trash=false ^
   sync %vsuh.backup.files.path% uu0:iris 
 exit /b
 
